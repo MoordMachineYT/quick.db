@@ -4,7 +4,7 @@ const util = require('util'),
 module.exports = function(ID, data, options, db, webview) {
   const getInfo = new Promise((resolve, error) => {
 
-    if (typeof data !== 'number') return console.log('Error: .add() data is not a number.');
+    if (typeof data !== 'number') return error(new TypeError('.add() data is not a number.'));
 
     // Configure Options
     if (!options) options = {};
@@ -49,9 +49,9 @@ module.exports = function(ID, data, options, db, webview) {
               input = JSON.stringify(input);
               db.prepare(`UPDATE ${options.table} SET json = (?) WHERE ID = (?)`).run(input, ID);
 
-            } else console.log(`Error: Target for .add(${ID}, ${data}) is not a number.`);
+            } else error(new TypeError(`Target for .add(${ID}, ${data}) is not a number.`));
 
-          } else console.log(`Error: Target for .add(${ID}, ${data}) is not a number.`);
+          } else error(new TypeError(`Target for .add(${ID}, ${data}) is not a number.`));
 
         }
 
