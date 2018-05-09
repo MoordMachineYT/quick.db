@@ -44,7 +44,7 @@ module.exports = function(ID, data, options, db) {
 
           } catch (e) {
             response = `Unable to push, may not be pushing to an array. \nError: ${e.message}`;
-            returnDb();
+            return error(new Error(response);
           }
         } else {
 
